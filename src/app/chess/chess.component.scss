@@ -1,0 +1,26 @@
+body {
+  margin: 0px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  li {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #ccc;
+    text-align: center;
+    list-style-type: none;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+
+    p {
+      color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

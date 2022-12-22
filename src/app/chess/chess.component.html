@@ -1,0 +1,19 @@
+<div class="container p-4">
+  <ul
+    cols="4"
+    *ngFor="let item of table; let i = index"
+    id="item[i]"
+    class="row"
+  >
+    <li
+      *ngFor="let piece of item; let i = index"
+      class="col-sm p-3; let i=index"
+      (click)="isSelected ? move(piece.piece, piece.x, piece.y) : click(piece)"
+      id="{{ item + i }}"
+    >
+      <p>{{ piece?.piece?.name }}</p>
+    </li>
+  </ul>
+</div>
+<div></div>
+<!-- *ngFor="let j of table[i]; let p = index" -->
