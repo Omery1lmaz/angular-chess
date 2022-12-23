@@ -17,14 +17,20 @@ export class ChessComponent {
   }
 
   click(piece: any) {
-    this.isSelected = piece
-    console.log(this.isSelected, "isSelected");
+    console.log(piece, "piece");
+    if (piece.piece != null) {
+      this.isSelected = piece
+      console.log(piece.piece, "isSelected");
+    }
   }
 
   move(piece: any, toX: number, toY: number): any {
+    console.log(piece, "move")
     console.log("Move metodu sad", this.isSelected.x, this.isSelected.y)
-    console.log("Move metodu çaliştirildi")
-    if (toX && toY && this.isSelected.x && this.isSelected.y) {
+    console.log("Move metodu çaliştirildi", toX, toY)
+    console.log("if koşulu", toX && toY && this.isSelected.x && this.isSelected.y)
+    if (true) {
+      console.log("Move method if koşulu sağlandı")
       const test = this.isSelected.piece.move(this.table, this.isSelected.x, this.isSelected.y, toX, toY)
       console.log(test)
       this.isSelected = undefined;
