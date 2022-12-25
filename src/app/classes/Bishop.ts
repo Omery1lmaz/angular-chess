@@ -49,11 +49,16 @@ export class Bishop extends Piece {
     } else return false;
   }
 
-  test(toX: number): boolean {
-    if (toX > this.x) {
+  test(toY?: number): boolean {
+    if (toY && toY > this.y) {
+      console.log('true toy büyüktür')
       return true;
-    } else return false;
+    } else {
+      console.log('false toy küçüktür')
+      return false;
+    }
   }
+
   override getPossibleMoves(
     board: any,
     start: number,
@@ -66,12 +71,13 @@ export class Bishop extends Piece {
     const absY = toY - this.y;
     console.log('GetPossibleMoves');
     if (this.white) {
-      if (this.test(toX)) {
+      if (!this.test(toY)) {
         console.log('Ters Yön');
         for (let sayac: number = 0; sayac < absX; sayac++) {
+          console.log('Ters Yön 1 for loop');
           console.log(board[toY][toX], 'console.log bir ');
           toY++;
-          toX++;
+          toX--;
           if (board[toY][toX].piece != null) {
             console.log('if dolu');
             if (board[toY][toX].piece == board[this.y][this.x].piece) {
@@ -83,6 +89,7 @@ export class Bishop extends Piece {
           }
         }
         for (let sayac: number = 0; sayac < Math.abs(absY); sayac++) {
+          console.log('Ters Yön 2 for loop');
           console.log(board[toY][toX], 'console.log ters yönde istikamet');
           if (board[toY][toX].piece) {
             console.log('if dolu');
@@ -100,8 +107,7 @@ export class Bishop extends Piece {
         console.log('Ters Yön 1');
         for (let sayac: number = 0; sayac < absX; sayac++) {
           console.log(board[toY][toX], 'console.log');
-          toY++;
-          toX--;
+
           if (board[toY][toX].piece) {
             console.log('if dolu');
             if (board[toY][toX].piece == board[this.y][this.x].piece) {
@@ -111,6 +117,8 @@ export class Bishop extends Piece {
             console.log(board[toY][toX], 'if dolu');
             return (response = false);
           }
+          toY++;
+          toX--;
         }
         for (let sayac: number = 0; sayac < Math.abs(absY); sayac++) {
           console.log(board[toY][toX], 'console.log ters yönde istikamet');
@@ -123,11 +131,13 @@ export class Bishop extends Piece {
             console.log(board[toY][toX], 'if dolu');
             return (response = false);
           }
-          toY++;
+          toY--;
           toX++;
         }
       }
-    } else {
+      return response
+    }
+    else {
       for (let sayac: number = 0; sayac < absX; sayac++) {
         console.log(board[toY][toX], 'console.log doğru yön');
         toY--;
