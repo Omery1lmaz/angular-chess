@@ -1,3 +1,4 @@
+import { Board } from "./Board";
 import { Piece } from "./Piece";
 
 export class Queen extends Piece {
@@ -31,5 +32,29 @@ export class Queen extends Piece {
       console.log('DEneme sağa sola gidebilir');
       return true;
     } else return false
+  }
+  test(toY: number): any {
+    if (this.y > toY) {
+      return false
+    }
+    return true
+  }
+  test2(toX: number) {
+    if (this.x > toX) {
+      return false
+    }
+    return true
+  }
+
+  override getPossibleMoves(board: any, start: number, end: number, toX: number, toY: number): void {
+    if (this.y != toY) {
+      for (let i: number = this.y; this.test(toY) ? i < toY : i > toY; this.test(toY) ? i++ : i--) {
+        console.log(i, toY, "i toY");
+        const deneme23: number = i - toY;
+        console.log("For döngüsüne girildi" + deneme23);
+        console.log(this.test(toY), "test")
+        console.log(board[i][this.x], "board for döngüsü");
+      }
+    }
   }
 }

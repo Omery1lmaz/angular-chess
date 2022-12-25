@@ -31,31 +31,64 @@ export class Rook extends Piece {
         } else return false;
       } else return false;
       // gidilecek yerde parça varsa ve parça aynı renk değilse
-      console.log("Board Boş değil")
     } else return false;
   }
 
   test(toY: number): any {
     if (this.y > toY) {
       return false
-    } else if (this.y < toY) {
-      return true
     }
+    return true
+  }
+  test2(toX: number) {
+    if (this.x > toX) {
+      return false
+    }
+    return true
   }
   override getPossibleMoves(board: any, start: number, end: number, toX: number, toY: number): any {
     let deneme: boolean = false;
 
     const x = this.test(toY)
     if (this.y != toY) {
-
-      for (let i: number = this.y; i < toY; i++) {
+      for (let i: number = this.y; this.test(toY) ? i < toY : i > toY; this.test(toY) ? i++ : i--) {
         console.log(i, toY, "i toY");
         const deneme23: number = i - toY;
         console.log("For döngüsüne girildi" + deneme23);
         console.log(this.test(toY), "test")
-        console.log(board[5][this.x], "board for döngüsü");
+        console.log(board[i][this.x], "board for döngüsü");
+      }
+
+      // for(){met123}
+      // for(){met123()}
+
+      // met123(){
+      //   console.log(i, toY, "i toY");
+      //   const deneme23: number = i - toY;
+      //   console.log("For döngüsüne girildi" + deneme23);
+      //   console.log(this.test(toY), "test")
+      //   console.log(board[i][this.x], "board for döngüsü");
+      // }
+    }
+    else if (this.x != toX) {
+      console.log("Else if kontrolüne girildi ")
+      for (let i: number = this.x; this.test2(toX) ? i < toX : i > toX; this.test2(toX) ? i++ : i--) {
+        console.log(i, toY, "i toY");
+        const deneme23: number = i - toY;
+        console.log("For döngüsüne girildi" + deneme23);
+        console.log(this.test(toY), "test")
+        console.log(board[this.y][i], "Deneme 1414");
       }
     }
+    // if (this.x != toY) {
+    //   for (let i: number = this.y; this.test(toY) ? i < toY : i > toY; this.test(toY) ? i++ : i--) {
+    //     console.log(i, toY, "i toY");
+    //     const deneme23: number = i - toY;
+    //     console.log("For döngüsüne girildi" + deneme23);
+    //     console.log(this.test(toY), "test")
+    //     console.log(board[i][this.x], "board for döngüsü");
+    //   }
+    // }
 
 
     console.log("Get Possible moves",);
