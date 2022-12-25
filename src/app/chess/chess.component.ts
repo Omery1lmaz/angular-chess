@@ -18,7 +18,7 @@ export class ChessComponent {
 
   click(piece: any) {
     console.log(piece, "piece");
-    if (piece.piece != null) {
+    if (piece.piece) {
       this.isSelected = piece
       console.log(piece.piece, "isSelected");
     }

@@ -1,4 +1,3 @@
-import { Board } from "./Board";
 import { Piece } from "./Piece";
 
 export class Queen extends Piece {

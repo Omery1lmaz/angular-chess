@@ -8,10 +8,10 @@
     <li
       *ngFor="let piece of item; let i = index"
       class="col-sm p-3; let i=index"
-      (click)=" isSelected ? move(piece, piece.x, piece.y) :click(piece)"
+      (click)="isSelected ? move(piece, piece.x, piece.y) : click(piece)"
       id="{{ item + i }}"
     >
-      <p>{{ piece?.piece?.name }}</p>
+      <p>{{ piece?.piece?.name }} {{ piece?.x }} {{ piece?.y }}</p>
     </li>
   </ul>
 </div>
