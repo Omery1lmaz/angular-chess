@@ -10,6 +10,8 @@ export class ChessComponent {
   table: any;
   isSelected!: any;
   board: Board;
+  deneme: boolean = true;
+
   constructor() {
     this.board = new Board();
     this.table = this.board.getBoxes();

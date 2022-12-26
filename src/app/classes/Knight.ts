@@ -4,17 +4,16 @@ export class Knight extends Piece {
   constructor(white: boolean, name: string, x: number, y: number) {
     super(white, name, x, y)
   }
-  override move(board: any, start: number, end: number, toY: number, toX: number) {
-    if (this.canMove(board, start, end, toY, toX)) {
+  override move(board: any, start: number, end: number, toX: number, toY: number) {
+    if (this.canMove(board, start, end, toX, toY)) {
       console.log('toX toY', toX, toY);
       console.log('x y', this.x, this.y);
       console.log('At', board[toY][toX]);
+      board[toY][toX].piece = board[this.y][this.x].piece;
+      board[this.y][this.x].piece = null;
       this.x = toX;
       this.y = toY;
-      board[toX][toY].piece = board[end][start].piece;
-      board[end][start] = null;
-      board[toX][toY].piece.x = toY;
-      board[toX][toY].piece.y = toX;
+
       return true;
     } else {
       console.log("Knight Move methodu çaliştirilamadi");

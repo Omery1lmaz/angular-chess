@@ -1,4 +1,4 @@
-<div class="container p-4">
+<div class="container p-4 unselectable">
   <ul
     cols="4"
     *ngFor="let item of table; let i = index"
@@ -11,10 +11,13 @@
       (click)="isSelected ? move(piece, piece.x, piece.y) : click(piece)"
       id="{{ item + i }}"
     >
-      <p>{{ piece?.piece?.name }} {{ piece?.x }} {{ piece?.y }}</p>
+      <!-- <i class="fas fa-chess-bishop deneme"></i> -->
+      <!-- <i ngClass="[ deneme == true ? 'fas fa-chess-bishop deneme' :''"></i> -->
+      <!-- <p>{{ piece?.piece?.name }} {{ piece?.x }} {{ piece?.y }}</p> -->
+      <i
+        [ngClass]="[deneme === true ? 'fas fa-chess-' + piece.piece?.name + ' deneme': '', piece.piece?.white == true ? 'deneme1': '']"
+      ></i>
     </li>
   </ul>
 </div>
 <div></div>
-<!-- *ngFor="let j of table[i]; let p = index" -->
-<!--   -->

@@ -9,15 +9,15 @@ export class Pawn extends Piece {
     board: any,
     start: number,
     end: number,
-    toY: number,
-    toX: number
+    toX: number,
+    toY: number
   ) {
-    if (this.canMove(board, start, end, toY, toX)) {
-      board[end][start].piece.ismoved = true;
-      board[toX][toY].piece = board[end][start].piece;
-      board[end][start] = null;
-      board[toX][toY].piece.x = toY;
-      board[toX][toY].piece.y = toX;
+    if (this.canMove(board, start, end, toX, toY)) {
+      board[this.y][this.x].piece.ismoved = true;
+      board[toY][toX].piece = board[this.y][this.x].piece;
+      board[this.y][this.x].piece = null;
+      this.x = toX;
+      this.y = toY;
       return true;
     } else {
       console.log('Move metodu calismadi');

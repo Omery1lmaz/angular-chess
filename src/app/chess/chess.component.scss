@@ -24,3 +24,20 @@ ul {
     }
   }
 }
+.unselectable {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.deneme {
+  color: blueviolet;
+  font-size: xx-large;
+}
+
+.deneme1 {
+  color: white;
+  font-size: xx-large;
+}

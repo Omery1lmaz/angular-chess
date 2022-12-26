@@ -15,8 +15,8 @@ export abstract class Piece {
   move(board: Board, start: number, end: number, toX: number, toY: number) { }
   canMove(board: Board, start: number, end: number, toX: number, toY: number) { }
   getPossibleMoves(board: Board, start: number, end: number, toX: number, toY: number) { }
-  isAvailable(toX: number, toY: number) {
-    if (toX == this.x && toY == this.y) { return false; }
+  isAvailable(board: any, toX: number, toY: number) {
+    if (toX == this.x && toY == this.y && this.white == board[toY][toX].piece.white) { return false; }
     return true;
   }
 }
