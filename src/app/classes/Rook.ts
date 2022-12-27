@@ -45,18 +45,18 @@ export class Rook extends Piece {
     } else return false;
   }
 
-  test(toY: number): any {
-    if (this.y > toY) {
-      return false;
-    }
-    return true;
-  }
-  test2(toX: number) {
-    if (this.x > toX) {
-      return false;
-    }
-    return true;
-  }
+  // test(toY: number): any {
+  //   if (this.y > toY) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+  // test2(toX: number) {
+  //   if (this.x > toX) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
   override getPossibleMoves(
     board: any,
     start: number,
@@ -64,48 +64,9 @@ export class Rook extends Piece {
     toX: number,
     toY: number
   ): any {
-    let deneme: boolean = false;
+    // let deneme: boolean = false;
+    return this.forwardWalking(board, toX, toY);
 
-    if (this.y != toY) {
-      for (
-        let i: number = this.y;
-        this.test(toY) ? i < toY : i > toY;
-        this.test(toY) ? i++ : i--
-      ) {
-        console.log(i, toY, 'i toY');
-        const deneme23: number = i - toY;
-        console.log('For döngüsüne girildi' + deneme23);
-        console.log(this.test(toY), 'test');
-        console.log(board[i][this.x], 'board for döngüsü');
-        if (board[i][this.x] == board[this.y][this.x]) {
-          console.log('Parça Eşit');
-        } else if (board[i][this.x].piece != null) {
-          console.log('Engel var');
-          deneme = true;
-          break;
-        }
-      }
-    } else if (this.x != toX) {
-      console.log('Else if kontrolüne girildi ');
-      for (
-        let i: number = this.x;
-        this.test2(toX) ? i < toX : i > toX;
-        this.test2(toX) ? i++ : i--
-      ) {
-        console.log(i, toY, 'i toY');
-        const deneme23: number = i - toY;
-        console.log('For döngüsüne girildi' + deneme23);
-        console.log(this.test(toY), 'test');
-        console.log(board[this.y][i], 'Deneme 1414');
-        if (board[this.y][i] == board[this.y][this.x]) {
-          console.log('Parça eşit');
-        } else if (board[this.y][i].piece != null) {
-          console.log('Engel var');
-          deneme = true;
-          break;
-        }
-      }
-    }
-    return deneme;
+    // return deneme;
   }
 }

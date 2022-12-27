@@ -29,6 +29,7 @@ export class Pawn extends Piece {
     board: any,
     start: number,
     end: number,
+
     toX: number,
     toY: number
   ) {

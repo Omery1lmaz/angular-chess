@@ -36,19 +36,6 @@ export class Queen extends Piece {
       } else return false;
     } else return false
   }
-  test(toY: number): any {
-    if (this.y > toY) {
-      return false
-    }
-    return true
-  }
-  test2(toX: number) {
-    if (this.x > toX) {
-      return false
-    }
-    return true
-  }
-
   override getPossibleMoves(
     board: any,
     start: number,
@@ -60,6 +47,7 @@ export class Queen extends Piece {
     const lastX: number = toX;
     const lastY: number = toY;
     console.log('GetPossibleMoves');
+    // this.crossWalking(board, toX, toY)
     if (this.white) {
       console.log('white');
       // if (!this.test(toY))
@@ -68,41 +56,49 @@ export class Queen extends Piece {
         console.log('y > toy');
         if (this.x > toX) {
           console.log('x > tox');
-
+          console.log(lastX, lastY,)
+          console.log('toY-1', toY + 1, 'this y', this.y);
           for (let sayac: number = 0; this.y > toY; sayac++) {
-            console.log('Ters Yön 1 for loop');
-            console.log(board[toY][toX], 'console.log bir');
-
-            if (board[toY][toX].piece != null) {
-              console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
-                console.log(board[toY][toX].piece, 'if dolu');
-                return true;
-              }
-              console.log(board[toY][toX], 'if dolu');
-              return (response = false);
-            }
             toY++;
             toX++;
+            console.log('Ters Yön 1 for loop');
+            console.log(board[toY][toX], 'console.log bir');
+            if (board[toY][toX].piece != null) {
+              console.log(board[toY][toX], 'if parça dolu');
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
+                console.log(board[toY][toX].piece, 'if dolu');
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
+              } else {
+                console.log(board[toY][toX], 'if dolu');
+                return (response = false);
+              }
+            }
+
           }
         } else {
           console.log('x deneme');
           for (let sayac: number = 0; this.y > toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');
-
+            toY++;
+            toX--;
             if (board[toY][toX].piece != null) {
               console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
                 console.log(board[toY][toX].piece, 'if dolu');
-                return true;
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
               } else {
                 console.log(board[toY][toX], 'if dolu');
                 return (response = false);
               }
             }
-            toY++;
-            toX--;
+
           }
         }
       } else {
@@ -113,36 +109,44 @@ export class Queen extends Piece {
           for (let sayac: number = 0; this.y > toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');
-
-            if (board[toY][toX].piece != null) {
-              console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
-                console.log(board[toY][toX].piece, 'if dolu');
-                return true;
-              }
-              console.log(board[toY][toX], 'if dolu');
-              return (response = false);
-            }
             toY++;
             toX++;
+            if (board[toY][toX].piece != null) {
+              console.log('if dolu');
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
+                console.log(board[toY][toX].piece, 'if dolu');
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
+              } else {
+                console.log(board[toY][toX], 'if dolu');
+                return (response = false);
+              }
+            }
+
           }
         } else {
           console.log('x deneme');
           for (let sayac: number = 0; this.y > toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');
-
-            if (board[toY][toX].piece != null) {
-              console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
-                console.log(board[toY][toX].piece, 'if dolu');
-                return true;
-              }
-              console.log(board[toY][toX], 'if dolu');
-              return (response = false);
-            }
             toY++;
             toX--;
+            if (board[toY][toX].piece != null) {
+              console.log('if dolu');
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
+                console.log(board[toY][toX].piece, 'if dolu');
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
+              } else {
+                console.log(board[toY][toX], 'if dolu');
+                return (response = false);
+              }
+            }
+
           }
         } console.log('y > toy');
         if (this.x > toX) {
@@ -151,36 +155,44 @@ export class Queen extends Piece {
           for (let sayac: number = 0; this.y < toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');
-
-            if (board[toY][toX].piece != null) {
-              console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
-                console.log(board[toY][toX].piece, 'if dolu');
-                return true;
-              }
-              console.log(board[toY][toX], 'if dolu');
-              return (response = false);
-            }
             toY--;
             toX++;
+            if (board[toY][toX].piece != null) {
+              console.log('if dolu');
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
+                console.log(board[toY][toX].piece, 'if dolu');
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
+              } else {
+                console.log(board[toY][toX], 'if dolu');
+                return (response = false);
+              }
+            }
+
           }
         } else {
           console.log('x deneme');
           for (let sayac: number = 0; this.y < toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');
-
-            if (board[toY][toX].piece != null) {
-              console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
-                console.log(board[toY][toX].piece, 'if dolu');
-                return true;
-              }
-              console.log(board[toY][toX], 'if dolu');
-              return (response = false);
-            }
             toY--;
             toX--;
+            if (board[toY][toX].piece != null) {
+              console.log('if dolu');
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
+                console.log(board[toY][toX].piece, 'if dolu');
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
+              } else {
+                console.log(board[toY][toX], 'if dolu');
+                return (response = false);
+              }
+            }
+
           }
         }
       }
@@ -197,36 +209,44 @@ export class Queen extends Piece {
           for (let sayac: number = 0; this.y > toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');
-
-            if (board[toY][toX].piece != null) {
-              console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
-                console.log(board[toY][toX].piece, 'if dolu');
-                return true;
-              }
-              console.log(board[toY][toX], 'if dolu');
-              return (response = false);
-            }
             toY++;
             toX++;
+            if (board[toY][toX].piece != null) {
+              console.log('if dolu');
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
+                console.log(board[toY][toX].piece, 'if dolu');
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
+              } else {
+                console.log(board[toY][toX], 'if dolu');
+                return (response = false);
+              }
+            }
+
           }
         } else {
           console.log('x deneme');
           for (let sayac: number = 0; this.y > toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');
-
-            if (board[toY][toX].piece != null) {
-              console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
-                console.log(board[toY][toX].piece, 'if dolu');
-                return true;
-              }
-              console.log(board[toY][toX], 'if dolu');
-              return (response = false);
-            }
             toY++;
             toX--;
+            if (board[toY][toX].piece != null) {
+              console.log('if dolu');
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
+                console.log(board[toY][toX].piece, 'if dolu');
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
+              } else {
+                console.log(board[toY][toX], 'if dolu');
+                return (response = false);
+              }
+            }
+
           }
         }
       } else {
@@ -237,79 +257,93 @@ export class Queen extends Piece {
           for (let sayac: number = 0; this.y > toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');
-
-            if (board[toY][toX].piece != null) {
-              console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
-                console.log(board[toY][toX].piece, 'if dolu');
-                return true;
-              }
-              console.log(board[toY][toX], 'if dolu');
-              return (response = false);
-            }
             toY++;
             toX++;
+            if (board[toY][toX].piece != null) {
+              console.log('if dolu');
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
+                console.log(board[toY][toX].piece, 'if dolu');
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
+              } else {
+                console.log(board[toY][toX], 'if dolu');
+                return (response = false);
+              }
+            }
+
           }
         } else {
           console.log('x deneme');
           for (let sayac: number = 0; this.y > toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');
-
-            if (board[toY][toX].piece != null) {
-              console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
-                console.log(board[toY][toX].piece, 'if dolu');
-                return true;
-              }
-              console.log(board[toY][toX], 'if dolu');
-              return (response = false);
-            }
             toY++;
             toX--;
+            if (board[toY][toX].piece != null) {
+              console.log('if dolu');
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
+                console.log(board[toY][toX].piece, 'if dolu');
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
+              } else {
+                console.log(board[toY][toX], 'if dolu');
+                return (response = false);
+              }
+            }
+
           }
         } console.log('y > toy');
         if (this.x > toX) {
           console.log('x > tox');
-
           for (let sayac: number = 0; this.y < toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');
-
-            if (board[toY][toX].piece != null) {
-              console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
-                console.log(board[toY][toX].piece, 'if dolu');
-                return true;
-              }
-              console.log(board[toY][toX], 'if dolu');
-              return (response = false);
-            }
             toY--;
             toX++;
+            if (board[toY][toX].piece != null) {
+              console.log('if dolu');
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
+                console.log(board[toY][toX].piece, 'if dolu');
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
+              } else {
+                console.log(board[toY][toX], 'if dolu');
+                return (response = false);
+              }
+            }
+
           }
         } else {
           console.log('x deneme');
           for (let sayac: number = 0; this.y < toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');
-
-            if (board[toY][toX].piece != null) {
-              console.log('if dolu');
-              if (board[toY][toX].piece == board[this.y][this.x].piece || board[toY][toX].piece == board[lastY][lastX].piece) {
-                console.log(board[toY][toX].piece, 'if dolu');
-                return true;
-              }
-              console.log(board[toY][toX], 'if dolu');
-              return (response = false);
-            }
             toY--;
             toX--;
+            if (board[toY][toX].piece != null) {
+              console.log('if dolu');
+              if (board[toY][toX].piece == board[this.y][this.x].piece) {
+                console.log(board[toY][toX].piece, 'if dolu');
+                return true
+              } else if (board[toY][toX] == board[lastY][lastX]) {
+                console.log('Else if dolu', board[toY][toX], board[lastY][lastX]);
+                break
+              } else {
+                console.log(board[toY][toX], 'if dolu');
+                return (response = false);
+              }
+            }
+
           }
         }
       }
-    }
-    return response;
+    } return response;
   }
   getPossibleMovesForward(
     board: any,

@@ -15,9 +15,16 @@
       <!-- <i ngClass="[ deneme == true ? 'fas fa-chess-bishop deneme' :''"></i> -->
       <!-- <p>{{ piece?.piece?.name }} {{ piece?.x }} {{ piece?.y }}</p> -->
       <i
-        [ngClass]="[deneme === true ? 'fas fa-chess-' + piece.piece?.name + ' deneme': '', piece.piece?.white == true ? 'deneme1': '']"
+        [ngClass]="[
+          deneme === true
+            ? 'fas fa-chess-' + piece.piece?.name + ' deneme'
+            : '',
+          piece.piece?.white == true ? 'deneme1' : ''
+        ]"
       ></i>
     </li>
   </ul>
 </div>
-<div></div>
+<div class="gameOver" *ngIf="gameOver">
+  <h1>Game Over</h1>
+</div>
