@@ -223,14 +223,8 @@ export class Bishop extends Piece {
       }
     } else {
 
-      console.log('white');
-      // if (!this.test(toY))
-      console.log(this.y, toY, 'this.y toY')
       if (this.y > toY) {
-        console.log('y > toy');
         if (this.x > toX) {
-          console.log('x > tox');
-
           for (let sayac: number = 0; this.y > toY; sayac++) {
             console.log('Ters Yön 1 for loop');
             console.log(board[toY][toX], 'console.log bir');

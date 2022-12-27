@@ -7,7 +7,9 @@
   >
     <li
       *ngFor="let piece of item; let i = index"
-      class="col-sm p-3; let i=index"
+      [ngStyle]="{
+        'background-color': getColor(piece, item) ? '#4A3C2F' : '#9C8671'
+      }"
       (click)="isSelected ? move(piece, piece.x, piece.y) : click(piece)"
       id="{{ item + i }}"
     >
@@ -17,14 +19,18 @@
       <i
         [ngClass]="[
           deneme === true
-            ? 'fas fa-chess-' + piece.piece?.name + ' deneme'
+            ? 'fas fa-chess-' + piece.piece?.name + ' deneme '
             : '',
-          piece.piece?.white == true ? 'deneme1' : ''
+          piece.piece?.white == true ? 'deneme1' : '',
+          piece == isSelected ? 'deneme3' : ''
         ]"
       ></i>
     </li>
   </ul>
 </div>
 <div class="gameOver" *ngIf="gameOver">
-  <h1>Game Over</h1>
+  <div class="gameOver gameOver2">
+    <h1>Game Over</h1>
+    <button class="restartGameBtn" (click)="restartGame()">Restart Game</button>
+  </div>
 </div>

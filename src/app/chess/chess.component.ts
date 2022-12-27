@@ -9,7 +9,7 @@ import { Board } from '../classes/Board';
 export class ChessComponent {
   table: any;
   isSelected!: any;
-  board: any;
+  board: Board;
   deneme: boolean = true;
   queue: boolean = true; // true = white
   gameOver = false;
@@ -21,7 +21,17 @@ export class ChessComponent {
     const test = this.checkMate();
     console.log(test, "Test deneme 123")
   }
+  getColor(piece: any, item: number) {
+    const isDark: boolean = (piece.x + piece.y) % 2 === 0
+    // console.log(isDark, "isDark");
+    return isDark ? true : false;
+  }
 
+  restartGame() {
+
+    console.log(this.board.resetTable());
+    this.gameOver = false;
+  }
   click(piece: any) {
     if (piece.piece?.white && this.queue) {
       this.isSelected = piece
@@ -33,7 +43,6 @@ export class ChessComponent {
       console.log('Siyah taraf Seçti')
     }
   }
-
   move(piece: any, toX: number, toY: number): any {
     console.log(piece, "move")
     console.log("Move metodu sad", this.isSelected.x, this.isSelected.y)
