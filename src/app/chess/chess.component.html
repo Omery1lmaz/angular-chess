@@ -8,7 +8,7 @@
     <li
       *ngFor="let piece of item; let i = index"
       [ngStyle]="{
-        'background-color': getColor(piece, item) ? '#4A3C2F' : '#9C8671'
+        'background-color': getColor(piece, item) ? '#9C8671' : '#4A3C2F'
       }"
       (click)="isSelected ? move(piece, piece.x, piece.y) : click(piece)"
       id="{{ item + i }}"

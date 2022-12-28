@@ -1,3 +1,4 @@
+import { Move } from "../interfaces/move";
 import { Piece } from "./Piece";
 
 export class King extends Piece {
@@ -5,16 +6,12 @@ export class King extends Piece {
     super(white, name, x, y);
   }
 
-  override move(board: any, start: number, end: number, toX: number, toY: number) {
-    if (this.canMove(board, start, end, toX, toY)) {
-      board[toY][toX].piece = board[this.y][this.x].piece;
-      board[this.y][this.x].piece = null;
-      this.x = toX;
-      this.y = toY;
-      return true;
+  override move(move: Move) {
+    if (this.canMove(move)) {
+      return this.PutPiece(move);
     } else { return false; }
   }
-  override canMove(board: any, start: number, end: number, toX: number, toY: number) {
+  override canMove(move: Move) {
     console.log("Can Move Çalıştırıldı King")
     /*
     - X yönünde hareket konrolü
@@ -22,8 +19,8 @@ export class King extends Piece {
     - çapraz y yönünde hareket kontolü
     - çapraz x yönünde hareket kontrolü
     */
-    if ((((toX == this.x + 1) || (toX == this.x - 1))) && ((toY == this.y + 1) || (toY == this.y - 1)) || ((toX == this.x) && ((toY == this.y + 1) || (toY == this.y - 1)) || ((toY == this.y) && ((toX == this.x - 1) || (toX == this.x + 1))))) {
-      if (this.white == board[toY][toX].piece?.white) {
+    if ((((move.toX == this.x + 1) || (move.toX == this.x - 1))) && ((move.toY == this.y + 1) || (move.toY == this.y - 1)) || ((move.toX == this.x) && ((move.toY == this.y + 1) || (move.toY == this.y - 1)) || ((move.toY == this.y) && ((move.toX == this.x - 1) || (move.toX == this.x + 1))))) {
+      if (this.white == move.board[move.toY][move.toX].piece?.white) {
         console.log("Karşı taraf farklı ");
         return false;
       } else return true;

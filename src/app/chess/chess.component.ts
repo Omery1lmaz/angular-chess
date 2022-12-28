@@ -28,9 +28,9 @@ export class ChessComponent {
   }
 
   restartGame() {
-
     console.log(this.board.resetTable());
     this.gameOver = false;
+    this.queue = true;
   }
   click(piece: any) {
     if (piece.piece?.white && this.queue) {

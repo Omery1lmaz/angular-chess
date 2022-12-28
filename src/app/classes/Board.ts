@@ -17,7 +17,6 @@ export class Board {
     this.board();
   }
   board() {
-
     this.boxes[0][0] = new Spot(new Rook(false, 'rook', 0, 0), 0, 0);
     this.boxes[0][1] = new Spot(new Knight(false, 'knight', 0, 1), 0, 1);
     this.boxes[0][2] = new Spot(new Bishop(false, 'bishop', 0, 2), 0, 2);

@@ -43,17 +43,19 @@ ul {
   user-select: none;
 }
 .deneme {
+  cursor: pointer;
+  font-size: 4rem;
   color: black;
   text-shadow: -1px 1px 0 #fff, 1px 1px 0 #fff, 1px -1px 0 #fff,
     -1px -1px 0 #fff;
-  font-size: xx-large;
 }
 
 .deneme1 {
+  cursor: pointer;
+  font-size: 3.5rem;
   color: white;
   text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
     -1px -1px 0 #000;
-  font-size: xx-large;
 }
 .gameOver {
   z-index: 10;

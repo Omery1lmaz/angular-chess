@@ -1,3 +1,4 @@
+import { Move } from "../interfaces/move";
 import { Board } from "./Board";
 
 export abstract class Piece {
@@ -12,11 +13,22 @@ export abstract class Piece {
     this.x = x;
     this.y = y;
   }
-  move(board: Board, start: number, end: number, toX: number, toY: number) { }
-  canMove(board: Board, start: number, end: number, toX: number, toY: number) { }
-  getPossibleMoves(board: Board, start: number, end: number, toX: number, toY: number) { }
-  isAvailable(board: any, toX: number, toY: number) {
-    if (toX == this.x && toY == this.y && this.white == board[toY][toX].piece.white) { return false; }
+
+  //Parçayı Yerleştirme
+  PutPiece(move: Move) {
+    move.board[this.y][this.x].piece.ismoved = true;
+    move.board[move.toY][move.toX].piece = move.board[this.y][this.x].piece;
+    move.board[this.y][this.x].piece = null;
+    this.x = move.toX;
+    this.y = move.toY;
+    return true;
+  }
+  // board: Board, start: number, end: number, toX: number, toY: number
+  move(move: Move) { }
+  canMove(move: Move) { }
+  getPossibleMoves(move: Move) { }
+  isAvailable(move: Move) {
+    if (move.toX == this.x && move.toY == this.y && this.white == move.board[move.toY][move.toX].piece.white) { return false; }
     return true;
   }
   crossWalking(board: any, toX: number, toY: number): any {
@@ -285,22 +297,22 @@ export abstract class Piece {
     }
     return true;
   }
-  forwardWalking(board: any, toX: number, toY: number): any {
+  forwardWalking(move: Move): any {
     let deneme: boolean = false;
-    if (this.y != toY) {
+    if (this.y != move.toY) {
       for (
         let i: number = this.y;
-        this.test(toY) ? i < toY : i > toY;
-        this.test(toY) ? i++ : i--
+        this.test(move.toY) ? i < move.toY : i > move.toY;
+        this.test(move.toY) ? i++ : i--
       ) {
-        console.log(i, toY, 'i toY');
-        const deneme23: number = i - toY;
+        console.log(i, move.toY, 'i move.toY');
+        const deneme23: number = i - move.toY;
         console.log('For döngüsüne girildi' + deneme23);
-        console.log(this.test(toY), 'test');
-        console.log(board[i][this.x], 'board for döngüsü');
-        if (board[i][this.x] == board[this.y][this.x]) {
+        console.log(this.test(move.toY), 'test');
+        console.log(move.board[i][this.x], 'board for döngüsü');
+        if (move.board[i][this.x] == move.board[this.y][this.x]) {
           console.log('Parça Eşit');
-        } else if (board[i][this.x].piece != null) {
+        } else if (move.board[i][this.x].piece != null) {
           console.log('Engel var');
           deneme = true;
           break;
@@ -308,21 +320,21 @@ export abstract class Piece {
         return deneme;
       }
       return deneme;
-    } else if (this.x != toX) {
+    } else if (this.x != move.toX) {
       console.log('Else if kontrolüne girildi ');
       for (
         let i: number = this.x;
-        this.test2(toX) ? i < toX : i > toX;
-        this.test2(toX) ? i++ : i--
+        this.test2(move.toX) ? i < move.toX : i > move.toX;
+        this.test2(move.toX) ? i++ : i--
       ) {
-        console.log(i, toY, 'i toY');
-        const deneme23: number = i - toY;
+        console.log(i, move.toY, 'i move.toY');
+        const deneme23: number = i - move.toY;
         console.log('For döngüsüne girildi' + deneme23);
-        console.log(this.test(toY), 'test');
-        console.log(board[this.y][i], 'Deneme 1414');
-        if (board[this.y][i] == board[this.y][this.x]) {
+        console.log(this.test(move.toY), 'test');
+        console.log(move.board[this.y][i], 'Deneme 1414');
+        if (move.board[this.y][i] == move.board[this.y][this.x]) {
           console.log('Parça eşit');
-        } else if (board[this.y][i].piece != null) {
+        } else if (move.board[this.y][i].piece != null) {
           console.log('Engel var');
           deneme = true;
           break;
