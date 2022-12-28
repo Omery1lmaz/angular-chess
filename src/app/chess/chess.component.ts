@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Board } from '../classes/Board';
+import { Move } from '../interfaces/move';
 
 @Component({
   selector: 'app-chess',
@@ -33,24 +34,27 @@ export class ChessComponent {
     this.queue = true;
   }
   click(piece: any) {
-    if (piece.piece?.white && this.queue) {
+    // if (piece.piece?.white && this.queue) {
+    if (piece.piece != null) {
       this.isSelected = piece
-      console.log(piece.piece, "isSelected");
-      console.log("Beyaz taraf seçti");
-    } else if (piece.piece?.white == false && !this.queue) {
-      this.isSelected = piece
-      console.log(piece.piece, "isSelected");
-      console.log('Siyah taraf Seçti')
     }
+    console.log(piece.piece, "isSelected");
+    console.log("Beyaz taraf seçti");
+    // } else if (piece.piece?.white == false && !this.queue) {
+    //   this.isSelected = piece
+    //   console.log(piece.piece, "isSelected");
+    //   console.log('Siyah taraf Seçti')
+    // }
   }
   move(piece: any, toX: number, toY: number): any {
     console.log(piece, "move")
     console.log("Move metodu sad", this.isSelected.x, this.isSelected.y)
     console.log("Move metodu çaliştirildi", toX, toY)
     console.log("if koşulu", toX && toY && this.isSelected.x && this.isSelected.y)
+    const move: Move = { board: this.table, toX, toY }
     if (this.isSelected) {
       console.log("Move method if koşulu sağlandı")
-      const test = this.isSelected.piece.move(this.table, this.isSelected.x, this.isSelected.y, toX, toY)
+      const test = this.isSelected.piece.move(move)
       this.table = this.board.getBoxes()
       this.isSelected = undefined;
       if (test) {

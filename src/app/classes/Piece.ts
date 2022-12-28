@@ -1,4 +1,4 @@
-import { Move } from "../interfaces/move";
+import { Move, Move2 } from "../interfaces/move";
 import { Board } from "./Board";
 
 export abstract class Piece {
@@ -297,7 +297,25 @@ export abstract class Piece {
     }
     return true;
   }
+
+  getParams(move: Move) {
+    /*
+    pice?: any,
+  board: any,
+  toX: number,
+  toY: number */
+    const board = move.board;
+    const toX = move.toX
+    const toY = move.toY;
+    const x = this.x
+    const y = this.y
+    const piece = this
+    const toBoard = move.board[toY][toX].piece
+    return { board, toX, toY, piece, x, y, toBoard }
+  }
   forwardWalking(move: Move): any {
+
+
     let deneme: boolean = false;
     if (this.y != move.toY) {
       for (

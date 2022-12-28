@@ -385,5 +385,4 @@ export class Queen extends Piece {
     }
     return deneme;
   }
-
 }

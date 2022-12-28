@@ -14,15 +14,24 @@ export class Knight extends Piece {
     }
   }
   override canMove(move: Move) {
-    // console.log("Knight Move x y", this.x, this.y);
-    // console.log('TOX TOY ', move.toX, move.toY);
-    console.log((move.toX == this.x + 2 || move.toX == this.x - 2) && (move.toY == this.y + 2 || move.toY == this.y - 2), "deneme can move")
-    if ((((move.toY == this.y + 2) || (move.toY == this.y - 2)) && ((move.toX == this.x + 1) || (move.toX == this.x - 1))) || (((move.toX == this.x + 2) || (move.toX == this.x - 2)) && ((move.toY == this.y + 1) || (move.toY == this.y - 1)))) {
+    const { board, toX, toY, piece, x, y, toBoard } = this.getParams(move)
+
+    // console.log("Knight Move x y", x, y);
+    // console.log('TOX TOY ', toX, toY);
+
+    /**************************************************** */
+    // const deneme1 =  ((toY == y + 1) || (toY == y - 1))
+    // const deneme2 = ((toX == x + 2) || (toX == x - 2))
+    // const deneme3  = ((toX == x + 1) || (toX == x - 1))
+    // const deneme4 = ((toY == y + 2) || (toY == y - 2))
+
+    const deneme = (((toY == y + 2) || (toX == x + 2)) || ((toY == y - 2) || (toX == x - 2)))
+    const deneme1 = (((toX == x + 1) || (toY == y + 1)) || ((toX == x - 1) || (toY == y - 1)))
+    if (deneme && deneme1) {
       console.log("Doğru yön");
-      if ((move.board[move.toY][move.toX].piece != null)) {
-        console.log("Eleman boş");
+      if ((toBoard != null)) {
         // renkler aynı değilse
-        if (move.board[move.toY][move.toX].piece.white != this.white) {
+        if (toBoard.white != this.white) {
           console.log("Aynı reknk değiller");
           return true
         } else return false;

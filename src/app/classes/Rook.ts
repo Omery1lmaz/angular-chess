@@ -33,24 +33,9 @@ export class Rook extends Piece {
     } else return false;
   }
 
-  // test(toY: number): any {
-  //   if (this.y > toY) {
-  //     return false;
-  //   }
-  //   return true;
-  // }
-  // test2(move.toX: number) {
-  //   if (this.x > move.toX) {
-  //     return false;
-  //   }
-  //   return true;
-  // }
   override getPossibleMoves(
     move: Move
   ): any {
-    // let deneme: boolean = false;
     return this.forwardWalking(move);
-
-    // return deneme;
   }
 }

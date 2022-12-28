@@ -21,109 +21,41 @@ export class Pawn extends Piece {
       return false;
     }
   }
+
   // (this.ismoved && (toY = (this.y + 1))) && (!this.ismoved && (toY = (this.y + 1 || this.y + 2))) && this.isAvailable(toX, toY)
   override canMove(
     move: Move
   ) {
+    const { board, toX, toY, piece, x, y, toBoard } = this.getParams(move)
     console.log('deneme');
-    // Piyon hareket etmemişse, gideceği yer doğruysa ve hareket edeceği yer boşsa veya doluysa
-    // console.log(this.ismoved, 'isMoved');
-    // console.log(toX, toY, 'toX toY');
-    // console.log(this.x, this.y, 'this.x this.y');
-    // console.log(board[toY][toX], 'Gidilecek yerdeki taş');
+    const deneme: number = this.white ? -1 : 1
+    const deneme1: number = this.white ? -2 : 2
+    const moveforward: boolean = (toY == y + deneme1)
+    const moveforward1: boolean = (toY == y + deneme)
+    const yemeIslemi: boolean = (toBoard !== null) && (x == toX - 1 || x == toX + 1) && toBoard?.white != this.white
     if (this.getPossibleMoves(move)) {
-      if (this.white) {
-        console.log('White');
-        if (
-          !this.ismoved &&
-          (move.toY == this.y - 2 || move.toY == this.y - 1) &&
-          this.x == move.toX
-        ) {
-          console.log(move.board[move.toY][move.toX].piece, 'deneme 3 öncesi board null mi?');
-          if (move.board[move.toY][move.toX].piece == null) {
-            return true;
-          } else {
-            return false;
-          }
-        }
-        // Piyon bir ileri gitmişse
-        else if (move.toY == this.y - 1) {
-          console.log('bir');
-          console.log('this.x');
-          console.log(
-            move.board[move.toX][move.toY].piece,
-            'iki girmeden önce ',
-            move.toY,
-            this.x,
-            'tox this.x'
-          );
-          // Gidilecek yer boşsa ve x değeri doğruysa
-          if (move.board[move.toY][move.toX].piece == null && move.toX == this.x) {
-            console.log('iki');
-            return true;
-          }
-          // Gidilecek yer doluysa, gidilecek yerdeki taş aynı renk değilse ve x değeri doğruysa
-          else if (
-            move.board[move.toY][move.toX].piece !== null &&
-            (this.x == move.toX - 1 || this.x == move.toX + 1) &&
-            move.board[move.toY][move.toX].piece?.white != this.white
-          ) {
-            console.log('üç');
-            return true;
-          } else {
-            return false;
-          }
+      // if (this.white) {
+      // Piyon hareket etmemişse ve iki kare ileri gidecekse
+      if (!this.ismoved && (moveforward) && x == toX) {
+        if (toBoard == null) {
+          return true;
         } else {
-          console.log('to y ve this.y', move.toY == this.y - 1);
-          console.log('beş');
-          console.log('start');
           return false;
         }
-      } else if (!this.white) {
-        console.log('Black');
-        if (
-          !this.ismoved &&
-          (move.toY == this.y + 2 || move.toY == this.y + 1) &&
-          this.x == move.toX
-        ) {
-          console.log(move.board[move.toY][move.toX].piece, 'deneme 3 öncesi board null mi?');
-          if (move.board[move.toY][move.toX].piece == null) {
-            return true;
-          } else {
-            return false;
-          }
+      }
+      // Piyon bir ileri gitmişse
+      else if (moveforward1) {
+        // Gidilecek yer boşsa ve x değeri doğruysa
+        if (toBoard == null && toX == x) {
+          console.log('iki');
+          return true;
         }
-        // Piyon bir ileri gitmişse
-        else if (move.toY == this.y + 1) {
-          console.log('bir');
-          console.log('this.x');
-          console.log(
-            move.board[move.toX][move.toY].piece,
-            'iki girmeden önce ',
-            move.toY,
-            this.x,
-            'tox this.x'
-          );
-          // Gidilecek yer boşsa ve x değeri doğruysa
-          if (move.board[move.toY][move.toX].piece == null && move.toX == this.x) {
-            console.log('iki');
-            return true;
-          }
-          // Gidilecek yer doluysa, gidilecek yerdeki taş aynı renk değilse ve x değeri doğruysa
-          else if (
-            move.board[move.toY][move.toX].piece !== null &&
-            (this.x == move.toX - 1 || this.x == move.toX + 1) &&
-            move.board[move.toY][move.toX].piece?.white != this.white
-          ) {
-            console.log('üç');
-            return true;
-          } else {
-            return false;
-          }
+        // Gidilecek yer doluysa, gidilecek yerdeki taş aynı renk değilse ve x değeri doğruysa
+        else if (
+          yemeIslemi
+        ) {
+          return true;
         } else {
-          console.log('to y ve this.y', move.toY == this.y + 1);
-          console.log('beş');
-          console.log('start');
           return false;
         }
       } else {
@@ -134,16 +66,11 @@ export class Pawn extends Piece {
   override getPossibleMoves(
     move: Move
   ): boolean {
-    if (this.white) {
-      if (move.toY == this.y - 2 && move.board[move.toY + 1][this.x].piece) {
-        console.log(move.board[move.toY - 1][this.x].piece, ' Piyon if koşulu');
-        return false;
-      } else return true;
-    } else {
-      if (move.toY == this.y + 2 && move.board[move.toY - 1][this.x].piece) {
-        console.log(move.board[move.toY - 1][this.x].piece, ' Piyon if koşulu');
-        return false;
-      } else return true;
-    }
+    const { board, toX, toY, piece, x, y } = this.getParams(move)
+    const deneme = toY == y - 2 ? board[toY + 1][x].piece : board[toY - 1][y].piece
+    // İki ilerisi giderse 1 önceki kareyi kontrol et
+    if (deneme) {
+      return false;
+    } else return true;
   }
 }

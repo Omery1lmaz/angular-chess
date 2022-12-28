@@ -27,7 +27,8 @@ export class Board {
     this.boxes[0][7] = new Spot(new Rook(false, 'rook', 0, 7), 0, 7);
     // White Pawns
     for (let i = 0; i < 8; i++) {
-      this.boxes[1][i] = new Spot(new Pawn(false, 'pawn', 1, i), 1, i);
+      // this.boxes[1][i] = new Spot(new Pawn(false, 'pawn', 1, i), 1, i);
+      this.boxes[1][i] = new Spot(null, 1, i);
     }
     //  black pieces
     this.boxes[7][0] = new Spot(new Rook(true, 'rook', 7, 0), 7, 0);
@@ -40,7 +41,8 @@ export class Board {
     this.boxes[7][7] = new Spot(new Rook(true, 'rook', 7, 7), 7, 7);
     // Black Pawns
     for (let i = 0; i < 8; i++) {
-      this.boxes[6][i] = new Spot(new Pawn(true, 'pawn', 6, i), 6, i);
+      // this.boxes[6][i] = new Spot(new Pawn(true, 'pawn', 6, i), 6, i);
+      this.boxes[6][i] = new Spot(null, 6, i);
     }
     // throws blank cells as null
     for (let i = 2; i < 6; i++) {
