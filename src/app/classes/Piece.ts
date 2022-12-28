@@ -314,23 +314,19 @@ export abstract class Piece {
     return { board, toX, toY, piece, x, y, toBoard }
   }
   forwardWalking(move: Move): any {
-
-
+    const { board, toX, toY, piece, x, y, toBoard } = this.getParams(move)
     let deneme: boolean = false;
-    if (this.y != move.toY) {
-      for (
-        let i: number = this.y;
-        this.test(move.toY) ? i < move.toY : i > move.toY;
-        this.test(move.toY) ? i++ : i--
-      ) {
-        console.log(i, move.toY, 'i move.toY');
-        const deneme23: number = i - move.toY;
-        console.log('For döngüsüne girildi' + deneme23);
-        console.log(this.test(move.toY), 'test');
-        console.log(move.board[i][this.x], 'board for döngüsü');
-        if (move.board[i][this.x] == move.board[this.y][this.x]) {
+
+    if (y != toY) {
+      for (let i: number = y;
+        this.test(toY) ? i < toY : i > toY;
+        this.test(toY) ? i++ : i--) {
+        console.log(i, toY, 'i toY');
+        const deneme23: number = i - toY;
+        console.log(board[i][x], 'board for döngüsü');
+        if (board[i][x] == board[y][x]) {
           console.log('Parça Eşit');
-        } else if (move.board[i][this.x].piece != null) {
+        } else if (board[i][x].piece != null) {
           console.log('Engel var');
           deneme = true;
           break;
@@ -338,21 +334,21 @@ export abstract class Piece {
         return deneme;
       }
       return deneme;
-    } else if (this.x != move.toX) {
+    } else if (x != toX) {
       console.log('Else if kontrolüne girildi ');
       for (
-        let i: number = this.x;
-        this.test2(move.toX) ? i < move.toX : i > move.toX;
-        this.test2(move.toX) ? i++ : i--
+        let i: number = x;
+        this.test2(toX) ? i < toX : i > toX;
+        this.test2(toX) ? i++ : i--
       ) {
-        console.log(i, move.toY, 'i move.toY');
-        const deneme23: number = i - move.toY;
+        console.log(i, toY, 'i toY');
+        const deneme23: number = i - toY;
         console.log('For döngüsüne girildi' + deneme23);
-        console.log(this.test(move.toY), 'test');
-        console.log(move.board[this.y][i], 'Deneme 1414');
-        if (move.board[this.y][i] == move.board[this.y][this.x]) {
+        console.log(this.test(toY), 'test');
+        console.log(board[y][i], 'Deneme 1414');
+        if (board[y][i] == board[y][x]) {
           console.log('Parça eşit');
-        } else if (move.board[this.y][i].piece != null) {
+        } else if (board[y][i].piece != null) {
           console.log('Engel var');
           deneme = true;
           break;

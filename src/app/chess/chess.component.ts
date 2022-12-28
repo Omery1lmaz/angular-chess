@@ -72,10 +72,8 @@ export class ChessComponent {
     for (let i = 0; i < this.table.length; i++) {
       for (let j = 0; j < this.table[i].length; j++) {
         if (this.table[i][j].piece?.name == "king" && this.table[i][j].piece?.white) {
-          console.log(this.table[i][j], "King var beyaz");
           white = true;
         } else if (this.table[i][j].piece?.name == "king" && !this.table[i][j].piece?.white) {
-          console.log(this.table[i][j], "King var siyah");
           black = true;
         }
       }
