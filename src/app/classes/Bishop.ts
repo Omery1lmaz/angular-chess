@@ -11,11 +11,7 @@ export class Bishop extends Piece {
     move: Move
   ) {
     if (this.canMove(move)) {
-      move.board[move.toY][move.toX].piece = move.board[this.y][this.x].piece;
-      move.board[this.y][this.x].piece = null;
-      this.y = move.toY;
-      this.x = move.toX;
-      return true;
+      return this.PutPiece(move)
     } else {
       return false;
     }
@@ -29,7 +25,7 @@ export class Bishop extends Piece {
       const absX = move.toX - this.x;
       const absY = move.toY - this.y;
       if (Math.abs(absX) == Math.abs(absY)) {
-        if (this.getPossibleMoves(move)) {
+        if (this.Deneme(move)) {
           console.log('Get possible moves if koşulu')
           if (this.white != move.board[move.toY][move.toX].piece.piece?.white) {
             console.log('Renkler farklı karşıdaki taşı yiyebilir');
