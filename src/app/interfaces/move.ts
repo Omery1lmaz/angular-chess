@@ -1,5 +1,3 @@
-import { Board } from "../classes/Board";
-
 export interface Move {
   pice?: any,
   board: any,
@@ -7,18 +5,9 @@ export interface Move {
   toY: number
 }
 
-export interface Move2 {
-  pice?: any,
-  board: any,
-  toX: number,
-  toY: number,
-  x: number,
-  y: number
+export interface CheckPiecesAtPositionCross {
+  CheckPiecesAtPositionCross(move: Move): boolean
 }
-export interface Piece {
-  white: boolean;
-  ismoved: boolean;
-  name: string;
-  x: number;
-  y: number;
+export interface CheckPiecesAtPositionForward {
+  CheckPiecesAtPositionForward(move: Move): boolean
 }

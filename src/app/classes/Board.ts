@@ -9,14 +9,13 @@ import { Spot } from './Spot';
 export class Board {
   boxes: any = Array(8)
     .fill(0)
-    .map((x) => Array(8).fill(0));
+    .map(() => Array(8).fill(0));
   deneme!: any;
   constructor() {
-    console.log('Board constructor');
-    console.log(this.boxes);
     this.board();
   }
   board() {
+    //  Black pieces
     this.boxes[0][0] = new Spot(new Rook(false, 'rook', 0, 0), 0, 0);
     this.boxes[0][1] = new Spot(new Knight(false, 'knight', 0, 1), 0, 1);
     this.boxes[0][2] = new Spot(new Bishop(false, 'bishop', 0, 2), 0, 2);
@@ -25,12 +24,11 @@ export class Board {
     this.boxes[0][5] = new Spot(new Bishop(false, 'bishop', 0, 5), 0, 5);
     this.boxes[0][6] = new Spot(new Knight(false, 'knight', 0, 6), 0, 6);
     this.boxes[0][7] = new Spot(new Rook(false, 'rook', 0, 7), 0, 7);
-    // White Pawns
+    // Black Pawns
     for (let i = 0; i < 8; i++) {
-      // this.boxes[1][i] = new Spot(new Pawn(false, 'pawn', 1, i), 1, i);
-      this.boxes[1][i] = new Spot(null, 1, i);
+      this.boxes[1][i] = new Spot(new Pawn(false, 'pawn', 1, i), 1, i);
     }
-    //  black pieces
+    //  white pieces
     this.boxes[7][0] = new Spot(new Rook(true, 'rook', 7, 0), 7, 0);
     this.boxes[7][1] = new Spot(new Knight(true, 'knight', 7, 1), 7, 1);
     this.boxes[7][2] = new Spot(new Bishop(true, 'bishop', 7, 2), 7, 2);
@@ -39,10 +37,9 @@ export class Board {
     this.boxes[7][5] = new Spot(new Bishop(true, 'bishop', 7, 5), 7, 5);
     this.boxes[7][6] = new Spot(new Knight(true, 'knight', 7, 6), 7, 6);
     this.boxes[7][7] = new Spot(new Rook(true, 'rook', 7, 7), 7, 7);
-    // Black Pawns
+    // White Pawns
     for (let i = 0; i < 8; i++) {
-      // this.boxes[6][i] = new Spot(new Pawn(true, 'pawn', 6, i), 6, i);
-      this.boxes[6][i] = new Spot(null, 6, i);
+      this.boxes[6][i] = new Spot(new Pawn(true, 'pawn', 6, i), 6, i);
     }
     // throws blank cells as null
     for (let i = 2; i < 6; i++) {
@@ -52,7 +49,6 @@ export class Board {
     }
   }
   getBoxes() {
-    console.log('Get boxes');
     return this.boxes;
   }
   resetTable(): any {

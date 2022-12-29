@@ -28,7 +28,7 @@ ul {
     }
   }
 }
-.deneme3 {
+.selected {
   transition: all 0.2s;
   border: 2px dotted #ccc;
   border-radius: 30%;
@@ -42,7 +42,7 @@ ul {
   -ms-user-select: none;
   user-select: none;
 }
-.deneme {
+.icon {
   cursor: pointer;
   font-size: 4rem;
   color: black;
@@ -50,7 +50,7 @@ ul {
     -1px -1px 0 #fff;
 }
 
-.deneme1 {
+.white-color {
   cursor: pointer;
   font-size: 3.5rem;
   color: white;
@@ -101,11 +101,7 @@ ul {
   z-index: 10;
   width: 100%;
   height: 100%;
-  // top: 23%;
-  // left: 26%;
-  // position: absolute;
   color: #eacccb;
   border: none;
-  border-radius: 30px;
   font-size: xx-large;
 }

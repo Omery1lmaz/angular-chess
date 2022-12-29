@@ -1,10 +1,12 @@
-import { Move } from '../interfaces/move';
-import { Board } from './Board';
+import { CheckPiecesAtPositionForward, Move } from '../interfaces/move';
+import { HelperService } from '../service/helper.service';
 import { Piece } from './Piece';
 
-export class Rook extends Piece {
+export class Rook extends Piece implements CheckPiecesAtPositionForward {
+  helperService: HelperService;
   constructor(white: boolean, name: string, x: number, y: number) {
     super(white, name, x, y);
+    this.helperService = new HelperService();
   }
   override move(
     move: Move
@@ -18,14 +20,10 @@ export class Rook extends Piece {
   override canMove(
     move: Move
   ) {
-    console.log(move.toX, move.toY, 'TOX TOY ');
-    // console.log(this.getPossibleMoves(board, start, end, move.toX, move.toY));
-    if ((move.toX == this.x && move.toY != this.y) || (move.toY == this.y && move.toX != this.x)) {
-      console.log('İf koşul sağlandı');
-      if (!this.getPossibleMoves(move)) {
-        console.log('deneme 23');
-        if (move.board[move.toY][move.toX].piece?.white != this.white) {
-          console.log('deneme 24');
+    const { toX, toY, x, y, toBoard } = this.getParams(move)
+    if ((toX == x && toY != y) || (toY == y && toX != x)) {
+      if (!this.CheckPiecesAtPositionForward(move)) {
+        if (toBoard?.white != this.white) {
           return true;
         } else return false;
       } else return false;
@@ -33,9 +31,10 @@ export class Rook extends Piece {
     } else return false;
   }
 
-  override getPossibleMoves(
+  CheckPiecesAtPositionForward(
     move: Move
-  ): any {
-    return this.forwardWalking(move);
+  ): boolean {
+    const { board, toX, toY, piece, x, y, toBoard } = this.getParams(move)
+    return this.helperService.ForwardWalk(board, toX, toY, x, y);
   }
 }

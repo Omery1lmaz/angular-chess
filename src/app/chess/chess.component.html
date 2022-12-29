@@ -10,7 +10,7 @@
       [ngStyle]="{
         'background-color': getColor(piece, item) ? '#9C8671' : '#4A3C2F'
       }"
-      (click)="isSelected ? move(piece, piece.x, piece.y) : click(piece)"
+      (click)="isSelected ? move(piece.x, piece.y) : click(piece)"
       id="{{ item + i }}"
     >
       <!-- <i class="fas fa-chess-bishop deneme"></i> -->
@@ -18,11 +18,9 @@
       <!-- <p>{{ piece?.piece?.name }} {{ piece?.x }} {{ piece?.y }}</p> -->
       <i
         [ngClass]="[
-          deneme === true
-            ? 'fas fa-chess-' + piece.piece?.name + ' deneme '
-            : '',
-          piece.piece?.white == true ? 'deneme1' : '',
-          piece == isSelected ? 'deneme3' : ''
+          deneme === true ? 'fas fa-chess-' + piece.piece?.name + ' icon ' : '',
+          piece.piece?.white == true ? 'white-color' : '',
+          piece == isSelected ? 'selected' : ''
         ]"
       ></i>
     </li>

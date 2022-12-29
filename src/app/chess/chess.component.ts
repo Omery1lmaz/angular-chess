@@ -18,51 +18,37 @@ export class ChessComponent {
   constructor() {
     this.board = new Board();
     this.table = this.board.getBoxes();
-    console.log(this.board.getBoxes())
     const test = this.checkMate();
-    console.log(test, "Test deneme 123")
   }
   getColor(piece: any, item: number) {
     const isDark: boolean = (piece.x + piece.y) % 2 === 0
-    // console.log(isDark, "isDark");
     return isDark ? true : false;
   }
 
   restartGame() {
-    console.log(this.board.resetTable());
+    this.board.resetTable()
     this.gameOver = false;
     this.queue = true;
   }
   click(piece: any) {
-    // if (piece.piece?.white && this.queue) {
-    if (piece.piece != null) {
+    if (piece.piece?.white && this.queue) {
+      if (piece.piece != null) {
+        this.isSelected = piece
+      }
+    } else if (piece.piece?.white == false && !this.queue) {
       this.isSelected = piece
     }
-    console.log(piece.piece, "isSelected");
-    console.log("Beyaz taraf seçti");
-    // } else if (piece.piece?.white == false && !this.queue) {
-    //   this.isSelected = piece
-    //   console.log(piece.piece, "isSelected");
-    //   console.log('Siyah taraf Seçti')
-    // }
   }
-  move(piece: any, toX: number, toY: number): any {
-    console.log(piece, "move")
-    console.log("Move metodu sad", this.isSelected.x, this.isSelected.y)
-    console.log("Move metodu çaliştirildi", toX, toY)
-    console.log("if koşulu", toX && toY && this.isSelected.x && this.isSelected.y)
+  move(toX: number, toY: number): any {
     const move: Move = { board: this.table, toX, toY }
     if (this.isSelected) {
-      console.log("Move method if koşulu sağlandı")
-      const test = this.isSelected.piece.move(move)
+      const act = this.isSelected.piece.move(move)
       this.table = this.board.getBoxes()
       this.isSelected = undefined;
-      if (test) {
+      if (act) {
         this.queue = !this.queue
-        // this.checkMate() ? this.gameOver = false : true
         const checkMate = this.checkMate()
         checkMate ? this.gameOver = this.gameOver : this.gameOver = !this.gameOver
-        console.log(this.gameOver, "gameover denemeeeeeee")
       }
     }
   }
@@ -79,7 +65,6 @@ export class ChessComponent {
       }
     }
     if (white && black) {
-      console.log('white and black', white, black);
       return true;
     } else return false;
 
