@@ -20,21 +20,19 @@ export class Rook extends Piece implements CheckPiecesAtPositionForward {
   override canMove(
     move: Move
   ) {
-    const { toX, toY, x, y, toBoard } = this.getParams(move)
+    const { toX, toY, x, y, toSpot } = this.getParams(move)
     if ((toX == x && toY != y) || (toY == y && toX != x)) {
+      // if the Rook moves forward
       if (!this.CheckPiecesAtPositionForward(move)) {
-        if (toBoard?.white != this.white) {
-          return true;
-        } else return false;
+        return this.toSpotIsNull(toSpot)
       } else return false;
-      // gidilecek yerde parça varsa ve parça aynı renk değilse
     } else return false;
   }
 
   CheckPiecesAtPositionForward(
     move: Move
   ): boolean {
-    const { board, toX, toY, piece, x, y, toBoard } = this.getParams(move)
-    return this.helperService.ForwardWalk(board, toX, toY, x, y);
+    const { board, toX, toY, piece, x, y, toSpot } = this.getParams(move)
+    return this.helperService.Forwardmove(board, toX, toY, x, y);
   }
 }

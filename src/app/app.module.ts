@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChessComponent } from './chess/chess.component';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Board } from './classes/Board';
+import { Spot } from './classes/Spot';
+import { HelperService } from './service/helper.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,7 @@ import { ChessComponent } from './chess/chess.component';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [NgbModalConfig, NgbModal, Board, HelperService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

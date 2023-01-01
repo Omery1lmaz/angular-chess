@@ -28,6 +28,22 @@ ul {
     }
   }
 }
+.fas {
+  font-size: 36px;
+}
+.modal-button {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+}
+
+.modal-content {
+  position: absolute;
+  left: 50;
+  top: 50%;
+  width: 350px;
+  width: 350px;
+}
 .selected {
   transition: all 0.2s;
   border: 2px dotted #ccc;

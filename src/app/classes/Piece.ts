@@ -3,7 +3,6 @@ import { Move } from "../interfaces/move";
 export abstract class Piece {
   name!: string;
   white: boolean = false;
-  ismoved?= false;
   x!: number;
   y!: number;
   constructor(white: boolean, name: string, y: number, x: number) {
@@ -13,7 +12,6 @@ export abstract class Piece {
     this.y = y;
   }
 
-  //Parçayı Yerleştirme
   PutPiece(move: Move) {
     move.board[this.y][this.x].piece.ismoved = true;
     move.board[move.toY][move.toX].piece = move.board[this.y][this.x].piece;
@@ -32,7 +30,13 @@ export abstract class Piece {
     const x = this.x
     const y = this.y
     const piece = this
-    const toBoard = move.board[toY][toX].piece
-    return { board, toX, toY, piece, x, y, toBoard }
+    const toSpot = move.board[toY][toX].piece
+    return { board, toX, toY, piece, x, y, toSpot }
+  }
+
+  toSpotIsNull(toSpot: any): boolean {
+    if (this.white == toSpot?.white) {
+      return false;
+    } else return true;
   }
 }

@@ -10,7 +10,6 @@ export class Board {
   boxes: any = Array(8)
     .fill(0)
     .map(() => Array(8).fill(0));
-  deneme!: any;
   constructor() {
     this.board();
   }

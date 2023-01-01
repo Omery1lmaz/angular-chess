@@ -12,22 +12,20 @@ export class King extends Piece {
     } else { return false; }
   }
   override canMove(move: Move) {
-    const { toX, toY, toBoard } = this.getParams(move)
+    const { toX, toY, toSpot } = this.getParams(move)
     const xControl = ((toX == this.x + 1) || (toX == this.x - 1))
     const yControl = ((toY == this.y + 1) || (toY == this.y - 1))
     const xCross = (toX == this.x) && ((toY == this.y + 1) || (toY == this.y - 1))
     const yCross = ((toY == this.y) && ((toX == this.x - 1) || (toX == this.x + 1)))
     /*
-    - X yönünde hareket konrolü
-    - y yönünde hareket kontrolü
-    - çapraz y yönünde hareket kontolü
-    - çapraz x yönünde hareket kontrolü
+    - motion control on the x-axis
+    - motion control on the y-axis
+    - motion control in cross y-axis
+    - motion control in cross x-axis
     */
 
     if (xControl && yControl || (xCross || yCross)) {
-      if (this.white == toBoard?.white) {
-        return false;
-      } else return true;
+      return this.toSpotIsNull(toSpot)
     } else {
       return false;
     }

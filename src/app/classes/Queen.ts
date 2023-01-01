@@ -17,23 +17,21 @@ export class Queen extends Piece implements CheckPiecesAtPositionCross {
     }
   }
   override canMove(move: Move) {
-    const { board, toX, toY, piece, x, y, toBoard } = this.getParams(move)
+    const { board, toX, toY, piece, x, y, toSpot } = this.getParams(move)
     const absX = move.toX - this.x;
     const absY = move.toY - this.y;
     const xNotEqualTox = ((toX == x) && (toY != y))
     const yNotEqualToy = ((toY == y) && (toX != x))
 
     if (Math.abs(absX) == Math.abs(absY)) {
+      // if the Queen moves cross
       if (this.CheckPiecesAtPositionCross(move)) {
-        if (this.white == toBoard?.white) {
-          return false;
-        } else return true;
+        return this.toSpotIsNull(toSpot)
       } else return false;
     } else if ((xNotEqualTox || yNotEqualToy)) {
-      if (!this.helperService.ForwardWalk(board, toX, toY, x, y)) {
-        if (this.white == toBoard?.white) {
-          return false;
-        } else return true;
+      // if the Queen forward cross
+      if (!this.helperService.Forwardmove(board, toX, toY, x, y)) {
+        return this.toSpotIsNull(toSpot)
       } else return false;
     } else return false
   }
@@ -42,7 +40,7 @@ export class Queen extends Piece implements CheckPiecesAtPositionCross {
     move: Move
   ): boolean {
     let { board, toX, toY, x, y, } = this.getParams(move)
-    return this.helperService.helper(board, toY, toX, x, y);
+    return this.helperService.crossMove(board, toY, toX, x, y);
   }
 
 }

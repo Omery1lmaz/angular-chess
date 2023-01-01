@@ -2,6 +2,7 @@ import { CheckPiecesAtPositionForward, Move } from '../interfaces/move';
 import { Piece } from './Piece';
 
 export class Pawn extends Piece implements CheckPiecesAtPositionForward {
+  ismoved: boolean = false;
   constructor(white: boolean, name: string, x: number, y: number) {
     super(white, name, x, y);
   }
@@ -22,34 +23,31 @@ export class Pawn extends Piece implements CheckPiecesAtPositionForward {
   override canMove(
     move: Move
   ) {
-    const { toX, toY, x, y, toBoard } = this.getParams(move)
+    const { toX, toY, x, y, toSpot } = this.getParams(move)
     const isItOneSquare: number = this.white ? -1 : 1
     const isItTwoSquare: number = this.white ? -2 : 2
     const twoSquareControle: boolean = (toY == y + isItTwoSquare)
     const oneSquareControle: boolean = (toY == y + isItOneSquare)
-    const killControle: boolean = (toBoard !== null) && (x == toX - 1 || x == toX + 1) && toBoard?.white != this.white
+    const killControl: boolean = (toSpot !== null) && (x == toX - 1 || x == toX + 1) && toSpot?.white != this.white
 
     if (this.CheckPiecesAtPositionForward(move)) {
-      // Piyon hareket etmemişse ve iki kare ileri gidecekse
-      console.log('Deneme')
+      // if the pawn has not moved and will move forward two squares
       if (!this.ismoved && (twoSquareControle) && x == toX) {
-        if (toBoard == null) {
+        if (toSpot == null) {
           return true;
         } else {
           return false;
         }
       }
-      // Piyon bir ileri gitmişse
+      // one spot move
       else if (oneSquareControle) {
-        console.log('Deneme')
-        // Gidilecek yer boşsa ve x değeri doğruysa
-        if (toBoard == null && toX == x) {
-          console.log('Deneme 2')
+        // to Spot is null and x is right
+        if (toSpot == null && toX == x) {
           return true;
         }
-        // Gidilecek yer doluysa, gidilecek yerdeki taş aynı renk değilse ve x değeri doğruysa
+        // to Spot isn't null , x is right and toPiece is not same color
         else if (
-          killControle
+          killControl
         ) {
           return true;
         } else {
@@ -60,6 +58,14 @@ export class Pawn extends Piece implements CheckPiecesAtPositionForward {
       }
     } else return false;
   }
+  isItAtLastSpot(toY: number) {
+    if (this.white) {
+      if (toY == 0) { return true; } return false;
+    } else {
+      if (toY == 7) { return true; } return false;
+    }
+  }
+
   CheckPiecesAtPositionForward(
     move: Move
   ): boolean {

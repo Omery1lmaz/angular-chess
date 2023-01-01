@@ -1,28 +1,43 @@
 <div class="container p-4 unselectable">
   <ul
     cols="4"
-    *ngFor="let item of table; let i = index"
-    id="item[i]"
+    *ngFor="let spot of table; let i = index"
+    id="spot[i]"
     class="row"
   >
     <li
-      *ngFor="let piece of item; let i = index"
+      *ngFor="let piece of spot; let i = index"
       [ngStyle]="{
-        'background-color': getColor(piece, item) ? '#9C8671' : '#4A3C2F'
+        'background-color': getColor(piece) ? '#4A3C2F' : '#9C8671'
       }"
-      (click)="isSelected ? move(piece.x, piece.y) : click(piece)"
-      id="{{ item + i }}"
+      (click)="isSelected ? move(piece.x, piece.y, piece) : click(piece)"
+      id="{{ spot + i }}"
     >
-      <!-- <i class="fas fa-chess-bishop deneme"></i> -->
-      <!-- <i ngClass="[ deneme == true ? 'fas fa-chess-bishop deneme' :''"></i> -->
-      <!-- <p>{{ piece?.piece?.name }} {{ piece?.x }} {{ piece?.y }}</p> -->
       <i
         [ngClass]="[
-          deneme === true ? 'fas fa-chess-' + piece.piece?.name + ' icon ' : '',
+          'fas fa-chess-' + piece.piece?.name + ' icon ',
           piece.piece?.white == true ? 'white-color' : '',
           piece == isSelected ? 'selected' : ''
         ]"
       ></i>
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">
+            Please Choose a Piece
+          </h4>
+        </div>
+        <div class="modal-body">
+          <button
+            class="modal-button"
+            *ngFor="let spot of modalPieces; let i = index"
+            (click)="changePawn(spot)"
+          >
+            <i
+              [ngClass]="'fas fa-chess-' + spot.toLowerCase() + ' modalPieces'"
+            ></i>
+          </button>
+        </div>
+      </ng-template>
     </li>
   </ul>
 </div>

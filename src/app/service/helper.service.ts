@@ -7,21 +7,18 @@ export class HelperService {
 
   constructor() { }
 
-  public helper(board: any, toY: number, toX: number, x: number, y: number) {
+  public crossMove(board: any, toY: number, toX: number, x: number, y: number) {
     if (y > toY) {
       if (x > toX) {
-        return this.method(board, toY, toX, x, y, true, true, true);
+        return this.checknextCrossSpot(board, toY, toX, x, y, true, true, true);
       } else {
-        // büyüktür
-
-        return this.method(board, toY, toX, x, y, true, true, false);
+        return this.checknextCrossSpot(board, toY, toX, x, y, true, true, false);
       }
     } else {
       if (x > toX) {
-        return this.method(board, toY, toX, x, y, false, false, true);
-
+        return this.checknextCrossSpot(board, toY, toX, x, y, false, false, true);
       } else {
-        return this.method(board, toY, toX, x, y, false, false, false);
+        return this.checknextCrossSpot(board, toY, toX, x, y, false, false, false);
       }
     }
   }
@@ -38,8 +35,8 @@ export class HelperService {
     return true;
   }
 
-  ForwardWalk(board: any, toX: number, toY: number, x: number, y: number) {
-    let deneme: boolean = false;
+  Forwardmove(board: any, toX: number, toY: number, x: number, y: number) {
+    let result: boolean = false;
     if (y != toY) {
       for (
         let i: number = y;
@@ -48,11 +45,11 @@ export class HelperService {
       ) {
         if (board[i][x] == board[y][x]) {
         } else if (board[i][x].piece != null) {
-          deneme = true;
+          result = true;
           break;
         }
       }
-      return deneme;
+      return result;
     } else {
       for (
         let i: number = x;
@@ -61,17 +58,17 @@ export class HelperService {
       ) {
         if (board[y][i] == board[y][x]) {
         } else if (board[y][i].piece != null) {
-          deneme = true;
+          result = true;
           break;
         }
       }
-      return deneme
+      return result
     }
   }
-  method(board: any, toY: number, toX: number, x: number, y: number, test: boolean, toyControl: boolean, toxControl: boolean) {
+  checknextCrossSpot(board: any, toY: number, toX: number, x: number, y: number, test: boolean, toyControl: boolean, toxControl: boolean) {
     const lastX: number = toX;
     const lastY: number = toY;
-    let deneme: boolean = true;
+    let result: boolean = true;
     for (let sayac: number = 0; test ? y > toY : y < toY; sayac++) {
       toyControl ? toY = toY + 1 : toY = toY - 1;
       toxControl ? toX = toX + 1 : toX = toX - 1;
@@ -81,9 +78,9 @@ export class HelperService {
         } else if (board[toY][toX] == board[lastY][lastX]) {
           break
         } else {
-          return (deneme = false);
+          return (result = false);
         }
-      } deneme = false;
-    } return deneme
+      } result = false;
+    } return result
   }
 }

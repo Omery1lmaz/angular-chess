@@ -8,7 +8,6 @@ export class Bishop extends Piece implements CheckPiecesAtPositionCross {
     super(white, name, x, y);
     this.helperService = new HelperService();
   }
-
   override move(
     move: Move
   ) {
@@ -21,18 +20,12 @@ export class Bishop extends Piece implements CheckPiecesAtPositionCross {
   override canMove(
     move: Move
   ) {
-    const { toX, toY, x, y, toBoard } = this.getParams(move)
-    if (toX != x && toY != y) {
-      const absX = toX - x;
-      const absY = toY - y;
-      if (Math.abs(absX) == Math.abs(absY)) {
-        if (this.CheckPiecesAtPositionCross(move)) {
-          if (this.white != toBoard?.white) {
-            return true;
-          } else {
-            return false;
-          }
-        } else return false;
+    const { toX, toY, x, y, toSpot } = this.getParams(move)
+    const absX = toX - x;
+    const absY = toY - y;
+    if (Math.abs(absX) == Math.abs(absY)) {
+      if (this.CheckPiecesAtPositionCross(move)) {
+        return this.toSpotIsNull(toSpot)
       } else return false;
     } else return false;
   }
@@ -42,7 +35,7 @@ export class Bishop extends Piece implements CheckPiecesAtPositionCross {
   ): boolean {
     let { board, toX, toY, x, y, } = this.getParams(move)
 
-    return this.helperService.helper(board, toY, toX, x, y);
+    return this.helperService.crossMove(board, toY, toX, x, y);
   }
 
 }
